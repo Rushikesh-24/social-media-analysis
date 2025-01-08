@@ -46,15 +46,15 @@ export default function Home() {
         </p>
       </div>
       <div className="md:w-[30%] lg:w-1/3 hidden  h-2/3 md:flex justify-center items-center relative">
-      {/* <Spline
+        {/* <Spline
         scene="" 
       /> */}
-      <div className="relative grid grid-cols-2 grid-rows-2 w-full h-full gap-0">
-        <div className="size-52 rounded-full bg-red-300/65 blur-xl opacity-50 mx-10 my-10"></div>
-        <div className="size-52 rounded-full bg-green-300/65 blur-xl opacity-50"></div>
-        <div className="size-52 rounded-full bg-blue-300/65 blur-xl opacity-50"></div>
-        <div className="size-52 rounded-full bg-yellow-300/65 blur-xl opacity-50 -mx-10 -my-10"></div>
-      </div>
+        <div className="relative grid grid-cols-2 grid-rows-2 w-full h-full gap-0">
+          <div className="size-52 rounded-full bg-red-300/65 blur-xl opacity-50 mx-10 my-10"></div>
+          <div className="size-52 rounded-full bg-green-300/65 blur-xl opacity-50"></div>
+          <div className="size-52 rounded-full bg-blue-300/65 blur-xl opacity-50"></div>
+          <div className="size-52 rounded-full bg-yellow-300/65 blur-xl opacity-50 -mx-10 -my-10"></div>
+        </div>
       </div>
     </div>
   );

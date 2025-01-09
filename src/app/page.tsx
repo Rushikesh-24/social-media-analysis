@@ -2,6 +2,7 @@
 import { Roboto_Condensed } from "next/font/google";
 import Cursor from "../components/Cursor";
 import Spline from "@splinetool/react-spline";
+import AccountDialog from "@/components/AccountDialog";
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
             Helping individuals grow and develop their social media accounts by
             providing insights and strategies to increase engagement and reach.
           </p>
+          <AccountDialog />
         </div>
         <div className="md:w-[30%] lg:w-1/3 hidden  h-2/3 md:flex justify-center items-center relative">
           {/* <Spline

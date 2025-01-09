@@ -5,8 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line  } from 'recharts';
-import { Instagram, BarChart2, TrendingUp, Image, Film ,AlbumIcon, } from 'lucide-react';
+import { Instagram, BarChart2, TrendingUp, Image, Film ,AlbumIcon, Loader, } from 'lucide-react';
 import demoData from '../../../public/demo/data';
+import MarkdownPreviewer from '@/components/MarkdownPreviewer';
 
 interface Post {
     media_type: string;
@@ -18,7 +19,8 @@ interface Post {
 const Page = () => {
   const [posts, setPosts] = React.useState<Post[]>(demoData[0]);
   const [username, setUsername] = React.useState<string>('maisamayhoon');
-
+  const [loading, setLoading] = React.useState(false);
+  const [analysisData, setAnalysisData] = React.useState<any>(null);
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get('username');
@@ -28,11 +30,10 @@ const Page = () => {
     //console.log(userPost ,username);
   }, []);
 
-  useEffect(() => {
-    // Define the async function directly inside useEffect
+
     const fetchData = async () => {
       if (!username) return; // Prevent unnecessary API calls if username is empty
-  
+      setLoading(true);
       try {
         const response = await fetch("/api/langflow", {
           method: "POST",
@@ -47,14 +48,18 @@ const Page = () => {
         }
   
         const result = await response.json();
-        console.log(result);
+        console.log(result)
+        function removeNewlinesAfterPipes(data:string) {
+          // Use a regular expression to replace newline characters after "|"
+          return data.replace(/(\|)\n\s*/g, '$1 ');
+      }
+        setAnalysisData(removeNewlinesAfterPipes(result.data.outputs[0].outputs[0].artifacts.message));
+        setLoading(false);
       } catch (error:any) {
         console.error("Failed to fetch data:", error.message);
       }
     };
-  
-    fetchData();
-  }, [username]);
+ 
   
   const processData = () => {
     const mediaTypeStats: { [key: string]: { type: string; totalLikes: number; totalComments: number; count: number } } = {};
@@ -97,17 +102,28 @@ const Page = () => {
   };
 
   return (
-    <div className="min-h-screen w-full mx-auto p-8 space-y-8 text-black bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800">
-      <CardHeader className="dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8 transition-all duration-300 hover:shadow-2xl drop-shadow-xl">
+    <div className="min-h-screen font-ubuntu-condensed w-full mx-auto p-8 space-y-8 text-black bg-gradient-to-br ">
+      <CardHeader className="dark:bg-gray-800 h-[33vh] flex flex-col items-center justify-center brightness-[108%] bg-[#f8e7dd] rounded-lg overflow-hidden glaze p-6 mb-8 transition-all duration-300 relative">
         <CardTitle className="text-4xl font-bold text-center flex items-center justify-center gap-4">
+          Hey
           <Instagram className="h-12 w-12 text-orange-500" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-600">
             {username}
           </span>
+          👋
         </CardTitle>
-        <CardDescription className="text-center text-xl mt-2">Comprehensive Performance Overview</CardDescription>
+        <CardDescription className="text-center text-black font-bold text-2xl mt-2">Comprehensive Performance Overview</CardDescription>
+        <button onClick={fetchData} className='pointer-events-auto flex gap-4 hover:scale-105 duration-300 z-10 cursor-pointer bg-black text-white rounded-2xl p-3 px-5 t-10'>Analyse my profile {loading && <Loader className='animate-spin'/>}</button>
       </CardHeader>
-
+      {
+        analysisData &&
+        <div className='shadow p-6 rounded-xl'>
+          <p className='text-2xl font-bold'>Analysis Report</p>
+            <div className='mt-5'>
+              <MarkdownPreviewer data={analysisData}/>
+            </div>
+          </div>
+      }
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {processedData.map((item) => (
           <Card key={item.type} className="overflow-hidden transition-all duration-300 hover:shadow-lg drop-shadow-xl">

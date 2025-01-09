@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
@@ -25,8 +25,36 @@ const Page = () => {
     const userPost  = demoData.find((subArray: Post[]) => subArray[0]?.account === username) || demoData[0];
     setPosts(userPost);
     setUsername(username || 'maisamayhoon');
-    console.log(userPost ,username);
+    //console.log(userPost ,username);
   }, []);
+
+  useEffect(() => {
+    // Define the async function directly inside useEffect
+    const fetchData = async () => {
+      if (!username) return; // Prevent unnecessary API calls if username is empty
+  
+      try {
+        const response = await fetch("/api/langflow", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ input_value:username }),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+  
+        const result = await response.json();
+        console.log(result);
+      } catch (error:any) {
+        console.error("Failed to fetch data:", error.message);
+      }
+    };
+  
+    fetchData();
+  }, [username]);
   
   const processData = () => {
     const mediaTypeStats: { [key: string]: { type: string; totalLikes: number; totalComments: number; count: number } } = {};

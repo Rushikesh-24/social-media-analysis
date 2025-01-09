@@ -1,3 +1,4 @@
+"use client"
 import {
     Dialog,
     DialogContent,
@@ -31,7 +32,7 @@ import {
             </DialogDescription>
             <Select onValueChange={(value)=>{
                 //localStorage.setItem('username', value);
-                window.location.replace(`/test?username=${value}`);
+                window.location.replace(`/dashboard?username=${value}`);
                 }}>
                 <SelectTrigger className="w-full">
                     <SelectValue placeholder="Choose a Creator" />

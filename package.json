@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-progress": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.2",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.57",
     "class-variance-authority": "^0.7.1",

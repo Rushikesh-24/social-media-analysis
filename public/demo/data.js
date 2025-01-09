@@ -1,4 +1,5 @@
-export const data = [[
+export const data = [
+  [
     {
       "account": "maisamayhoon",
       "caption": "😭😭❤️❤️❤️",
@@ -1184,4 +1185,4 @@ export const data = [[
   ]
   
 ]
-export const jsonData = JSON.stringify(data);
+export default data;

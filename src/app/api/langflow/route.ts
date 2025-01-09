@@ -6,12 +6,12 @@ export async function POST(req: NextRequest) {
     console.log(input_value);
 
     const response = await fetch(
-      "https://api.langflow.astra.datastax.com/lf/629526ed-a9a5-4287-adc8-4f105621aaa2/api/v1/run/24ea2fd0-4f61-4344-abf1-c83d94007b04?stream=false",
+      "https://api.langflow.astra.datastax.com/lf/e4432f8f-480d-4fbc-a9aa-b22f83d77a20/api/v1/run/f3faf2f7-2d99-48ac-a6fe-4730c8423200?stream=false",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_APP}`, // Replace with your token
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_APP2}`, // Replace with your token
         },
         body: JSON.stringify({
           input_value,
@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
             "ParseData-mqwyy": {},
             "File-K7XBi": {},
             "SplitText-G3PcG": {},
+            "NVIDIAEmbeddingsComponent-wW3gw": {}
           },
         }),
       }

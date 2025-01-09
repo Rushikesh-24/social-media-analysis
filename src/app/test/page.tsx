@@ -7,6 +7,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line  } from 'recharts';
 import { Instagram, BarChart2, TrendingUp, Image, Film ,AlbumIcon, } from 'lucide-react';
 import demoData from '../../../public/demo/data';
+import demoJson from '../../../public/demo/data.json';
 
 interface Post {
     media_type: string;
@@ -19,13 +20,23 @@ const Page = () => {
   const [posts, setPosts] = React.useState<Post[]>(demoData[0]);
   const [username, setUsername] = React.useState<string>('maisamayhoon');
 
+interface DemoJsonItem {
+    account: string;
+    media_type: string;
+    likes: number;
+    comments: number;
+}
+
+function filterByAccount(demoJson: DemoJsonItem[], accountName: string): DemoJsonItem[] {
+    return demoJson.filter(item => item.account === accountName);
+}
+
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get('username');
-    const userPost  = demoData.find((subArray: Post[]) => subArray[0]?.account === username) || demoData[0];
-    setPosts(userPost);
     setUsername(username || 'maisamayhoon');
-    //console.log(userPost ,username);
+    const result = filterByAccount(demoJson, "maisamayhoon");
+    setPosts(result);
   }, []);
 
   useEffect(() => {
@@ -53,7 +64,7 @@ const Page = () => {
       }
     };
   
-    fetchData();
+    // fetchData();
   }, [username]);
   
   const processData = () => {

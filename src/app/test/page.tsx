@@ -8,6 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, L
 import { Instagram, BarChart2, TrendingUp, Image, Film ,AlbumIcon, Loader, } from 'lucide-react';
 import demoData from '../../../public/demo/data';
 import MarkdownPreviewer from '@/components/MarkdownPreviewer';
+import demoJson from '../../../public/demo/data.json';
 
 interface Post {
     media_type: string;
@@ -21,13 +22,24 @@ const Page = () => {
   const [username, setUsername] = React.useState<string>('maisamayhoon');
   const [loading, setLoading] = React.useState(false);
   const [analysisData, setAnalysisData] = React.useState<any>(null);
+
+interface DemoJsonItem {
+    account: string;
+    media_type: string;
+    likes: number;
+    comments: number;
+}
+
+function filterByAccount(demoJson: DemoJsonItem[], accountName: string): DemoJsonItem[] {
+    return demoJson.filter(item => item.account === accountName);
+}
+
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const username = params.get('username');
-    const userPost  = demoData.find((subArray: Post[]) => subArray[0]?.account === username) || demoData[0];
-    setPosts(userPost);
     setUsername(username || 'maisamayhoon');
-    //console.log(userPost ,username);
+    const result = filterByAccount(demoJson, username || 'maisamayhoon');
+    setPosts(result);
   }, []);
 
 

@@ -29,18 +29,22 @@ import {
             <DialogDescription>
               Choose an Account from the below options to get started.
             </DialogDescription>
-            <Select>
+            <Select onValueChange={(value)=>{
+                //localStorage.setItem('username', value);
+                window.location.replace(`/test?username=${value}`);
+                }}>
                 <SelectTrigger className="w-full">
                     <SelectValue placeholder="Choose a Creator" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
                         <SelectLabel>Creator</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                        <SelectItem value="maisamayhoon">Samay Raina</SelectItem>
+                        <SelectItem value="hiteshchoudharyofficial">Hitesh Choudhary</SelectItem>
+                        <SelectItem value="rashmika_mandanna">Rashmika Mandanna</SelectItem>
+                        <SelectItem value="ksi">KSI</SelectItem>
+                        <SelectItem value="ishowspeed">IShowSpeed</SelectItem>
+                        <SelectItem value="beerbiceps">Ranveer Allahbadia</SelectItem>
                     </SelectGroup>
                 </SelectContent>
             </Select>

@@ -32,7 +32,7 @@ export default function Home() {
           start: "20% bottom",
           end: "bottom bottom",
           scrub: true,
-          markers: true,
+          // markers: true,
         },
       }
     );

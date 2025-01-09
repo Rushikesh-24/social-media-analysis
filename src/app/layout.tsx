@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto_Condensed } from "next/font/google";
 import "./globals.css";
+import Cursor from "@/components/Cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ubuntuCondensed.variable} antialiased cursor-none/`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ubuntuCondensed.variable} antialiased cursor-none`}
       >
-        
+        <Cursor/>
         {children}
       </body>
     </html>

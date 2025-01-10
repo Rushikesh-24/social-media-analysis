@@ -7,12 +7,12 @@ export async function POST(req: NextRequest) {
     console.log(input_value);
 
     const response = await fetch(
-      "https://api.langflow.astra.datastax.com/lf/629526ed-a9a5-4287-adc8-4f105621aaa2/api/v1/run/b62758e4-bac5-4948-8be9-2fab39936228?stream=false",
+      "https://api.langflow.astra.datastax.com/lf/95736785-054d-4954-abee-ea1f2e47c935/api/v1/run/162af610-a19c-48d6-9e5d-432e3ec0e0ea?stream=false",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_APP}`, // Replace with your token
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_APP3}`, // Replace with your token
         },
         body: JSON.stringify({
           input_value,
